@@ -13,13 +13,13 @@ GREEN_B	= \033[1;92m
 
 NAME	= philo
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror -pthread
 RM		= rm -rf
 
 SRC_P 	= srcs/
 OBJ_P 	= objs/
 
-SRC		= main philo input_checks init
+SRC		= main philosophers_dining handle_philos handle_forks time utils
 SRCS	= $(addprefix  $(SRC_P), $(addsuffix .c, $(SRC)))
 OBJ		= $(SRC:%.c=%.o)
 OBJS	= $(addprefix $(OBJ_P), $(addsuffix .o, $(OBJ)))
@@ -32,16 +32,13 @@ $(OBJ_P)%.o : $(SRC_P)%.c
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@echo "$(CYAN) [ .. ] | Compiling $(CYAN_B)philo$(END)$(CYAN)...$(END)"
 			@($(CC) $(FLAGS) $(OBJS) -o $(NAME))
-			@echo "$(GREEN) [ OK ] | $(GREEN_B)philo$(END) $(GREEN)ready!$(END)"
+			@echo "$(CYAN) [ OK ] | $(CYAN_B)philo$(END) $(CYAN)ready!$(END)"
 clean:
-			@echo "$(CYAN) [ .. ] | Cleaning objects...$(END)"
 			@($(RM) $(OBJ_P))
 			@echo "$(GREEN) [ OK ] | Objects removed!$(END)"
 
 fclean: 	clean
-			@echo "$(CYAN) [ .. ] | Cleaning executable...$(END)"
 			@($(RM) $(NAME))
 			@echo "$(GREEN) [ OK ] | Everything is clean!$(END)"
 
