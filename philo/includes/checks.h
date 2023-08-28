@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   checks.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 13:54:23 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/23 17:37:00 by aaugu            ###   ########.fr       */
+/*   Created: 2023/08/23 17:38:04 by aaugu             #+#    #+#             */
+/*   Updated: 2023/08/23 17:38:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef CHECKS_H
+# define CHECKS_H
 
-# define ERROR -1
-
-int	philosophers(int ac, char **av);
+int	input_checks(int ac, char **av);
 
 #endif

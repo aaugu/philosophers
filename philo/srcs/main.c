@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 13:54:23 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/23 17:37:00 by aaugu            ###   ########.fr       */
+/*   Created: 2023/07/24 13:08:44 by aaugu             #+#    #+#             */
+/*   Updated: 2023/08/23 17:37:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include <stdio.h>
+#include "philosophers.h"
 
-# define ERROR -1
+int	main(int ac, char **av)
+{
+	int	exit_code;
 
-int	philosophers(int ac, char **av);
-
-#endif
+	if (ac < 5 || ac > 6)
+	{
+		if (ac < 5)
+			printf("Error: Not enough arguments.");
+		else
+			printf("Error: Too much arguments.");
+		return (1);
+	}
+	else
+	{
+		exit_code = philosophers(ac, av);
+		return (exit_code);
+	}
+}
