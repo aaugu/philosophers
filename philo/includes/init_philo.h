@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_utils.h                                      :+:      :+:    :+:   */
+/*   init_philo.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 17:14:21 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/23 17:48:55 by aaugu            ###   ########.fr       */
+/*   Created: 2023/08/28 11:59:44 by aaugu             #+#    #+#             */
+/*   Updated: 2023/08/28 12:00:07 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_UTILS_H
-# define LIBFT_UTILS_H
-
-int		ft_atoi(const char *str);
-char	*ft_itoa(int n);
+#ifndef INIT_PHILO_H
+# define INIT_PHILO_H
 
 #endif

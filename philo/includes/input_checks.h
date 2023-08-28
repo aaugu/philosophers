@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checks.h                                           :+:      :+:    :+:   */
+/*   input_checks.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:38:04 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/23 17:38:26 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/28 10:38:10 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKS_H
-# define CHECKS_H
+#ifndef INPUT_CHECKS_H
+# define INPUT_CHECKS_H
 
-int	input_checks(int ac, char **av);
+bool	is_input_valid(int ac, char **av);
 
 #endif

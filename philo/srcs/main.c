@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:08:44 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/23 17:37:35 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/28 10:39:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	main(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 	{
-		if (ac < 5)
-			printf("Error: Not enough arguments.");
-		else
-			printf("Error: Too much arguments.");
+		printf("Error: Wrong number of arguments.");
 		return (1);
 	}
 	else
