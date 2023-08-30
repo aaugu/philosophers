@@ -6,13 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/28 21:55:30 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:32:30 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <string.h>
 #include "philosophers_dining.h"
+#include "routines.h"
 #include "philos.h"
 #include "forks.h"
 #include "utils.h"
@@ -29,7 +30,10 @@ int	philosophers_dining(int ac, char **av)
 	if (lay_the_table(&table, av, ac) == ERROR)
 		return (EXIT_FAILURE);
 	if (philosophers_having_dinner(&table) == ERROR)
+	{
+		clear_the_table(&table);
 		return (EXIT_FAILURE);
+	}
 	clear_the_table(&table);
 	return (EXIT_SUCCESS);
 }
@@ -47,13 +51,29 @@ int	lay_the_table(t_table *table, char **av, int ac)
 		return (ERROR);
 	if (init_forks_mutexes(table->fork_locks, table->nb_philos) == ERROR)
 		return (ERROR);
+	if (pthread_mutex_init(&table->prompt_lock, NULL) != 0)
+		return (msg(STR_ERR_MUTEX, "Prompt lock", ERROR));
 	return (EXIT_SUCCESS);
 }
 
 int	philosophers_having_dinner(t_table *table)
 {
-	(void) table;
-	return (0);
+	unsigned int	i;
+
+	table->start_time = get_time_in_ms();
+	i = 0;
+	while (i < table->nb_philos)
+	{
+		if (pthread_create(&table->philos[i].thread, NULL, &routine,
+				(void *)table) != 0)
+			return (msg(STR_ERR_THREAD, "Philo", ERROR));
+		i++;
+	}
+	if (table->nb_philos == 1)
+		return (EXIT_SUCCESS);
+	if (pthread_create(&table->waiter, NULL, &checking, (void *)table) != 0)
+		return (msg(STR_ERR_THREAD, "Waiter", ERROR));
+	return (EXIT_SUCCESS);
 }
 
 void	clear_the_table(t_table *table)

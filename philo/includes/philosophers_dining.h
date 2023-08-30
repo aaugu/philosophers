@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:54:23 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/28 21:48:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:49:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_table
 	unsigned int	time_to_sleep;
 	unsigned int	must_eat;
 	t_philo			philos[MAX_PHILOS];
+	pthread_t		waiter;
 	pthread_mutex_t	fork_locks[MAX_PHILOS];
 	pthread_mutex_t	prompt_lock;
 }	t_table;

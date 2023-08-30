@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:08:44 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/28 20:47:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:20:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ bool	is_numerical(char *str);
 int	main(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
-	{
-		printf("Error: Wrong number of arguments.");
-		return (EXIT_FAILURE);
-	}
+		return (msg("Error: Wrong number of arguments.", NULL, EXIT_FAILURE));
 	else
 	{
 		if (is_input_valid(ac, av) == false)
@@ -43,21 +40,12 @@ bool	is_input_valid(int ac, char **av)
 	while (i < ac)
 	{
 		if (!is_numerical(av[i]))
-		{
-			printf("%s is not numerical.", av[i]);
-			return (false);
-		}
+			return (msg("Not numerical.", av[i], false));
 		nb = ft_atoui(av[i]);
-		if (i == 1 && (nb < 1 || nb > 200))
-		{
-			printf("Wrong number of philosophers.");
-			return (false);
-		}
+		if (i == 1 && (nb < 1 || nb > MAX_PHILOS))
+			return (msg("Wrong number of philosophers", NULL, false));
 		if (i != 1 && (nb <= 0))
-		{
-			printf("%s: Invalid input of time.", av[i]);
-			return (false);
-		}
+			return (msg("Invalid input of time.", av[i], false));
 		i++;
 	}
 	return (true);

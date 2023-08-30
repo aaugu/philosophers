@@ -19,7 +19,7 @@ RM		= rm -rf
 SRC_P 	= srcs/
 OBJ_P 	= objs/
 
-SRC		= main philosophers_dining handle_philos handle_forks time utils
+SRC		= handle_forks handle_philos main philosophers_dining routines utils
 SRCS	= $(addprefix  $(SRC_P), $(addsuffix .c, $(SRC)))
 OBJ		= $(SRC:%.c=%.o)
 OBJS	= $(addprefix $(OBJ_P), $(addsuffix .o, $(OBJ)))

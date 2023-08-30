@@ -6,12 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/28 20:23:09 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:22:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
+#include <stdio.h>
 #include "utils.h"
+#include <sys/time.h>
 
 // atoi() function for unsigned int
 unsigned int	ft_atoui(const char *str)
@@ -29,4 +31,34 @@ unsigned int	ft_atoui(const char *str)
 	if (result > INT_MAX)
 		return (-1);
 	return (result);
+}
+
+/*
+int gettimeofday(struct timeval *tv, struct timezone *tz);
+	* Gives the number of seconds and microseconds since the Epoch.
+	* Argument tv stands for :
+		struct timeval {
+			time_t      tv_sec;     # seconds
+			suseconds_t tv_usec;    # microseconds
+		};
+ 	* The use of the timezone structure is obsolete; the tz argument should
+		normally be specified as NULL.
+*/
+
+/* Converts gettimeofday in ms */
+int	get_time_in_ms(void)
+{
+	struct timeval		tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+int	msg(char *str, char *arg, int exit_code)
+{
+	if (arg)
+		printf("%s: %s", arg, str);
+	else
+		printf("%s", str);
+	return (exit_code);
 }

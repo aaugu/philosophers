@@ -6,47 +6,40 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:33:00 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/28 21:38:07 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:18:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <stdlib.h>
 #include "philos.h"
+#include "utils.h"
 
-void	init_philos_forks(t_philo *philo, int nb_philos);
+void	init_philo_forks(t_philo *philo, int nb_philos);
 
-int		init_philos(t_philo *philos, int nb_philos)
+int	init_philos(t_philo *philos, int nb_philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < nb_philos)
 	{
 		if (pthread_mutex_init(&philos[i].mutex, NULL) != 0)
-			return (-1);
-		philos[i].id = i + 1;
+			return (msg(STR_ERR_MUTEX, "Philo", ERROR));
+		philos[i].id = i;
 		philos[i].nb_meals = 0;
-		init_philos_forks(&philos[i], nb_philos);
+		init_philo_forks(&philos[i], nb_philos);
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
 
-void	init_philos_forks(t_philo *philo, int nb_philos)
+void	init_philo_forks(t_philo *philo, int nb_philos)
 {
-	if (philo->id % 2)
-	{
-		philo->fork_left = philo->id - 1;
-		philo->fork_right = philo->id;
-	}
-	else
-	{
-		philo->fork_left = philo->id;
-		philo->fork_right = philo->id - 1;
-	}
-	if (philo->id == 1)
-		philo->fork_right = nb_philos;
+	philo->fork_left = philo->id;
+	philo->fork_right = philo->id - 1;
+	if (philo->id == 0 && nb_philos != 1)
+		philo->fork_right = nb_philos - 1;
 }
 
 void	destroy_philos(t_philo *philos, int nb_philos)

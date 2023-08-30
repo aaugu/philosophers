@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:26:41 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/28 21:36:42 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:14 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	init_forks_mutexes(pthread_mutex_t *fork_locks, int nb_philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < nb_philos)
@@ -27,9 +27,6 @@ int	init_forks_mutexes(pthread_mutex_t *fork_locks, int nb_philos)
 	}
 	return (EXIT_SUCCESS);
 }
-
-// void	lock_fork(void);
-// void	unlock_fork(void);
 
 void	destroy_forks_mutexes(pthread_mutex_t *fork_locks, int nb_philos)
 {
