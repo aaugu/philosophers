@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/30 17:32:30 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 20:03:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,19 @@
 
 int		lay_the_table(t_table *table, char **av, int ac);
 int		philosophers_having_dinner(t_table *table);
+int		destroy_mutexes(t_table *table, int exit_code);
 void	clear_the_table(t_table *table);
 
 int	philosophers_dining(int ac, char **av)
 {
 	t_table	table;
 
-	memset(&table, 0, sizeof(table));
+	if (av[5] == 0)
+		return (EXIT_SUCCESS);
 	if (lay_the_table(&table, av, ac) == ERROR)
-		return (EXIT_FAILURE);
+		return (destroy_mutexes(&table, EXIT_FAILURE));
 	if (philosophers_having_dinner(&table) == ERROR)
-	{
-		clear_the_table(&table);
-		return (EXIT_FAILURE);
-	}
+		return (destroy_mutexes(&table, EXIT_FAILURE));
 	clear_the_table(&table);
 	return (EXIT_SUCCESS);
 }
@@ -47,7 +46,7 @@ int	lay_the_table(t_table *table, char **av, int ac)
 	table->must_eat = -1;
 	if (ac - 1 == 5)
 		table->must_eat = ft_atoui(av[5]);
-	if (init_philos(table->philos, table->nb_philos) == ERROR)
+	if (init_philos(table->philos, table->nb_philos, table) == ERROR)
 		return (ERROR);
 	if (init_forks_mutexes(table->fork_locks, table->nb_philos) == ERROR)
 		return (ERROR);
@@ -76,6 +75,14 @@ int	philosophers_having_dinner(t_table *table)
 	return (EXIT_SUCCESS);
 }
 
+int		destroy_mutexes(t_table *table, int exit_code)
+{
+	destroy_forks_mutexes(table->fork_locks, table->nb_philos);
+	destroy_philos(table->philos, table->nb_philos);
+	pthread_mutex_destroy(&table->prompt_lock);
+	return (exit_code);
+}
+
 void	clear_the_table(t_table *table)
 {
 	unsigned int	i;
@@ -86,7 +93,5 @@ void	clear_the_table(t_table *table)
 		pthread_join(table->philos[i].thread, NULL);
 		i++;
 	}
-	destroy_forks_mutexes(table->fork_locks, table->nb_philos);
-	destroy_philos(table->philos, table->nb_philos);
-	pthread_mutex_destroy(&table->prompt_lock);
+	destroy_mutexes(table, EXIT_SUCCESS);
 }

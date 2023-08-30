@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:42:00 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/29 16:03:54 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 20:52:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ typedef struct s_philo
 	unsigned int	fork_left;
 	unsigned int	fork_right;
 	unsigned int	nb_meals;
+	unsigned int	last_meal;
+	pthread_mutex_t	meal_lock;
+	t_table			*table;
 	pthread_t		thread;
-	pthread_mutex_t	mutex;
 }					t_philo;
 
-int		init_philos(t_philo *philos, int nb_philos);
+int		init_philos(t_philo *philos, int nb_philos, t_table *table);
 void	destroy_philos(t_philo *philos, int nb_philos);
 
 #endif

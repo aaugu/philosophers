@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:54:23 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/30 15:49:49 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/30 20:53:13 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "philos.h"
 
 # define MAX_PHILOS 200
-# define ERROR -1
 
 /******************************************************************************
 *                                 Structures                                  *
@@ -31,9 +30,11 @@ typedef struct s_table
 	unsigned int	time_to_sleep;
 	unsigned int	must_eat;
 	t_philo			philos[MAX_PHILOS];
-	pthread_t		waiter;
+	bool			stop;
+	pthread_mutex_t	stop_lock;
 	pthread_mutex_t	fork_locks[MAX_PHILOS];
 	pthread_mutex_t	prompt_lock;
+	pthread_t		waiter;
 }	t_table;
 
 /******************************************************************************

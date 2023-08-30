@@ -1,29 +1,30 @@
 # Colour codes
-END		= \033[0m
-GRAY 	= \033[0;30m
-RED		= \033[0;31m
-GREEN	= \033[0;32m
-YELLOW	= \033[0;33m
-BLUE	= \033[0;34m
-PURPLE	= \033[0;35m
-CYAN	= \033[0;36m
-WHITE	= \033[0;37m
-CYAN_B	= \033[1;96m
-GREEN_B	= \033[1;92m
+END		=	\033[0m
+GRAY 	=	\033[0;30m
+RED		=	\033[0;31m
+GREEN	=	\033[0;32m
+YELLOW	=	\033[0;33m
+BLUE	=	\033[0;34m
+PURPLE	=	\033[0;35m
+CYAN	=	\033[0;36m
+WHITE	=	\033[0;37m
+CYAN_B	=	\033[1;96m
+GREEN_B	=	\033[1;92m
 
-NAME	= philo
-CC		= gcc
-FLAGS	= -Wall -Wextra -Werror -pthread
-RM		= rm -rf
+NAME	=	philo
+CC		=	gcc
+FLAGS	=	-Wall -Wextra -Werror -pthread
+RM		=	rm -rf
 
-SRC_P 	= srcs/
-OBJ_P 	= objs/
+SRC_P 	=	srcs/
+OBJ_P 	=	objs/
 
-SRC		= handle_forks handle_philos main philosophers_dining routines utils
-SRCS	= $(addprefix  $(SRC_P), $(addsuffix .c, $(SRC)))
-OBJ		= $(SRC:%.c=%.o)
-OBJS	= $(addprefix $(OBJ_P), $(addsuffix .o, $(OBJ)))
-INCLUDE	= -I includes
+SRC		=	handle_forks handle_philos main philosophers_dining philo_routine \
+			waiter routine utils
+SRCS	=	$(addprefix  $(SRC_P), $(addsuffix .c, $(SRC)))
+OBJ		=	$(SRC:%.c=%.o)
+OBJS	=	$(addprefix $(OBJ_P), $(addsuffix .o, $(OBJ)))
+INCLUDE	=	-I includes
 
 $(OBJ_P)%.o : $(SRC_P)%.c
 			@mkdir -p $(OBJ_P)
