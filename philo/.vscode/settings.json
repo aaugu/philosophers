@@ -2,5 +2,6 @@
 	"files.associations": {
 		"thread": "c",
 		"pthread.h": "c",
+		"philos.h": "c"
 	}
 }

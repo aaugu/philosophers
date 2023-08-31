@@ -6,13 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:33:00 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/30 20:52:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 09:42:18 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "philos.h"
-#include "philosophers_dining.h"
 #include "utils.h"
 
 void	init_philo_forks(t_philo *philo, int nb_philos);

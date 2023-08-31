@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/30 20:03:11 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 10:07:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <string.h>
 #include "philosophers_dining.h"
 #include "routines.h"
-#include "philos.h"
 #include "forks.h"
 #include "utils.h"
 
@@ -50,7 +49,7 @@ int	lay_the_table(t_table *table, char **av, int ac)
 		return (ERROR);
 	if (init_forks_mutexes(table->fork_locks, table->nb_philos) == ERROR)
 		return (ERROR);
-	if (pthread_mutex_init(&table->prompt_lock, NULL) != 0)
+	if (pthread_mutex_init(&table->print_lock, NULL) != 0)
 		return (msg(STR_ERR_MUTEX, "Prompt lock", ERROR));
 	return (EXIT_SUCCESS);
 }
@@ -75,11 +74,11 @@ int	philosophers_having_dinner(t_table *table)
 	return (EXIT_SUCCESS);
 }
 
-int		destroy_mutexes(t_table *table, int exit_code)
+int	destroy_mutexes(t_table *table, int exit_code)
 {
 	destroy_forks_mutexes(table->fork_locks, table->nb_philos);
 	destroy_philos(table->philos, table->nb_philos);
-	pthread_mutex_destroy(&table->prompt_lock);
+	pthread_mutex_destroy(&table->print_lock);
 	return (exit_code);
 }
 

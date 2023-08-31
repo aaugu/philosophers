@@ -6,13 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:08:44 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/30 17:20:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 09:56:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "philosophers_dining.h"
 #include "utils.h"
 
