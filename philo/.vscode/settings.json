@@ -2,6 +2,7 @@
 	"files.associations": {
 		"thread": "c",
 		"pthread.h": "c",
-		"philos.h": "c"
+		"philos.h": "c",
+		"philosophers_dining.h": "c"
 	}
 }

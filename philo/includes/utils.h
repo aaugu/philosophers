@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:37 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/31 09:54:20 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:37:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 *							    FUNCTIONS									  *
 ******************************************************************************/
 unsigned int	ft_atoui(const char *str);
-int				get_time_in_ms(void);
+unsigned int	get_time_in_ms(void);
 int				msg(char *str, char *arg, int exit_code);
 
 #endif

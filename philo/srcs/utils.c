@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:48:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/30 17:22:59 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:36:56 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int gettimeofday(struct timeval *tv, struct timezone *tz);
 */
 
 /* Converts gettimeofday in ms */
-int	get_time_in_ms(void)
+unsigned int	get_time_in_ms(void)
 {
 	struct timeval		tv;
 
