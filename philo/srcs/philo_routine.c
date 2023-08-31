@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:53:41 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/31 15:11:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 15:19:21 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ void	*routine(void *data)
 	if (philo->table->nb_philos == 1)
 		return (alone_routine(philo));
 	sync_start_time(philo);
-	unsigned int now = get_time_in_ms();
-	pthread_mutex_lock(&philo->table->print_lock);
-	printf("start time %u / now %u\n", philo->table->start_time, now);
-	pthread_mutex_unlock(&philo->table->print_lock);
 	return (NULL);
 }
 
