@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/31 10:07:49 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 10:40:57 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "philosophers_dining.h"
 #include "routines.h"
 #include "forks.h"
+#include "philos.h"
 #include "utils.h"
 
 int		lay_the_table(t_table *table, char **av, int ac);

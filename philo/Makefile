@@ -20,7 +20,7 @@ SRC_P 	=	srcs/
 OBJ_P 	=	objs/
 
 SRC		=	handle_forks handle_philos main philosophers_dining philo_routine \
-			waiter routine utils
+			waiter_routine utils
 SRCS	=	$(addprefix  $(SRC_P), $(addsuffix .c, $(SRC)))
 OBJ		=	$(SRC:%.c=%.o)
 OBJS	=	$(addprefix $(OBJ_P), $(addsuffix .o, $(OBJ)))

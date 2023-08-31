@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:54:23 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/31 10:11:43 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/08/31 10:40:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,26 @@
 
 # include <pthread.h>
 # include <stdbool.h>
-# include "philos.h"
 
 # define MAX_PHILOS 200
 
 /******************************************************************************
 *                                  Structure                                  *
 ******************************************************************************/
+typedef struct s_table	t_table;
+
+typedef struct s_philo
+{
+	unsigned int	id;
+	unsigned int	fork_left;
+	unsigned int	fork_right;
+	unsigned int	nb_meals;
+	unsigned int	last_meal;
+	pthread_mutex_t	meal_lock;
+	t_table			*table;
+	pthread_t		thread;
+}					t_philo;
+
 typedef struct s_table
 {
 	unsigned int	start_time;
