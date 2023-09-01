@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:51:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/01 11:18:49 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/01 12:06:31 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	print_status(t_philo *philo, int status)
 	unsigned int	now;
 
 	now = get_time_in_ms() - philo->table->start_time;
+	if (end_of_dinner(philo->table) == true)
+		return ;
 	pthread_mutex_lock(&philo->table->print_lock);
 	if (status == FORK)
 		printf("%u %d has taken a fork\n", now, philo->id + 1);
