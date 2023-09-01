@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_status.c                                     :+:      :+:    :+:   */
+/*   routines_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 09:59:03 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/31 14:24:23 by aaugu            ###   ########.fr       */
+/*   Created: 2023/09/01 10:51:15 by aaugu             #+#    #+#             */
+/*   Updated: 2023/09/01 11:18:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
+#include <stdbool.h>
 #include <stdio.h>
-#include "utils.h"
-#include "print_status.h"
 #include "philosophers_dining.h"
+#include "routines.h"
+#include "utils.h"
+
+bool	end_of_dinner(t_table *table)
+{
+	pthread_mutex_lock(&table->stop_lock);
+	if (table->stop == true)
+	{
+		pthread_mutex_unlock(&table->stop_lock);
+		return (true);
+	}
+	pthread_mutex_unlock(&table->stop_lock);
+	return (false);
+}
 
 void	print_status(t_philo *philo, int status)
 {
@@ -24,13 +36,13 @@ void	print_status(t_philo *philo, int status)
 	pthread_mutex_lock(&philo->table->print_lock);
 	if (status == FORK)
 		printf("%u %d has taken a fork\n", now, philo->id + 1);
-	if (status == EATING)
+	else if (status == EATING)
 		printf("%u %d is eating\n", now, philo->id + 1);
-	if (status == SLEEPING)
+	else if (status == SLEEPING)
 		printf("%u %d is sleeping\n", now, philo->id + 1);
-	if (status == THINKING)
+	else if (status == THINKING)
 		printf("%u %d is thinking\n", now, philo->id + 1);
-	if (status == DIED)
+	else if (status == DIED)
 		printf("%u %d died\n", now, philo->id + 1);
 	pthread_mutex_unlock(&philo->table->print_lock);
 }

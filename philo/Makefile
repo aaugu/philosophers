@@ -19,8 +19,8 @@ RM		=	rm -rf
 SRC_P 	=	srcs/
 OBJ_P 	=	objs/
 
-SRC		=	handle_forks handle_philos main philosophers_dining philo_routine \
-			print_status utils waiter_routine
+SRC		=	handle_forks handle_philos main philosophers_dining routine_philo \
+			routine_waiter routines_utils utils
 SRCS	=	$(addprefix  $(SRC_P), $(addsuffix .c, $(SRC)))
 OBJ		=	$(SRC:%.c=%.o)
 OBJS	=	$(addprefix $(OBJ_P), $(addsuffix .o, $(OBJ)))

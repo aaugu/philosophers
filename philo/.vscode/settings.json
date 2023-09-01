@@ -3,6 +3,8 @@
 		"thread": "c",
 		"pthread.h": "c",
 		"philos.h": "c",
-		"philosophers_dining.h": "c"
+		"philosophers_dining.h": "c",
+		"routines.h": "c",
+		"utils.h": "c"
 	}
 }
