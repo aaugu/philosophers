@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 19:26:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/01 14:48:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/01 14:55:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	*checking(void *data)
 			continue ;
 		else if (philos_ate_enough(table) == true)
 		{
-			printf("ici");
 			stop_dinner(table);
 			return (NULL);
 		}
