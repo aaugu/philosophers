@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/01 14:51:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/04 13:53:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	lay_the_table(t_table *table, char **av, int ac)
 	table->time_to_sleep = ft_atoui(av[4]);
 	table->must_eat = -1;
 	table->stop = false;
-	if (ac - 1 == 6)
+	if (ac == 6)
 		table->must_eat = ft_atoui(av[5]);
 	if (init_philos(table->philos, table->nb_philos, table) == ERROR)
 		return (ERROR);

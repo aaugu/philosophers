@@ -3,6 +3,11 @@
 		"pthread.h": "c",
 		"string.h": "c",
 		"philosophers_dining.h": "c",
-		"philos.h": "c"
+		"philos.h": "c",
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"unordered_map": "c"
 	}
 }

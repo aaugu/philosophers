@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:54:23 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/01 11:17:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/04 09:45:03 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ typedef enum e_status
 void	*routine(void *data);
 void	*checking(void *data);
 void	print_status(t_philo *philo, int status);
-bool	end_of_dinner(t_table *table);
+bool	dinner_finished(t_table *table);
 
 #endif

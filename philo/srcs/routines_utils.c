@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:51:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/01 12:06:31 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/04 13:54:01 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "routines.h"
 #include "utils.h"
 
-bool	end_of_dinner(t_table *table)
+bool	dinner_finished(t_table *table)
 {
 	pthread_mutex_lock(&table->stop_lock);
 	if (table->stop == true)
@@ -32,19 +32,24 @@ void	print_status(t_philo *philo, int status)
 {
 	unsigned int	now;
 
-	now = get_time_in_ms() - philo->table->start_time;
-	if (end_of_dinner(philo->table) == true)
+	pthread_mutex_lock(&philo->table->stop_lock);
+	if (philo->table->stop == true)
+	{
+		pthread_mutex_unlock(&philo->table->stop_lock);
 		return ;
+	}
+	pthread_mutex_unlock(&philo->table->stop_lock);
+	now = get_time_in_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->print_lock);
 	if (status == FORK)
-		printf("%u %d has taken a fork\n", now, philo->id + 1);
+		printf("\e[1;36m%u %d has taken a fork\n\e[0m", now, philo->id + 1);
 	else if (status == EATING)
-		printf("%u %d is eating\n", now, philo->id + 1);
+		printf("\e[1;32m%u %d is eating\n\e[0m", now, philo->id + 1);
 	else if (status == SLEEPING)
-		printf("%u %d is sleeping\n", now, philo->id + 1);
+		printf("\e[1;33m%u %d is sleeping\n\e[0m", now, philo->id + 1);
 	else if (status == THINKING)
-		printf("%u %d is thinking\n", now, philo->id + 1);
+		printf("\e[1;35m%u %d is thinking\n\e[0m", now, philo->id + 1);
 	else if (status == DIED)
-		printf("%u %d died\n", now, philo->id + 1);
+		printf("\e[1;31m%u %d died\n\e[0m", now, philo->id + 1);
 	pthread_mutex_unlock(&philo->table->print_lock);
 }
