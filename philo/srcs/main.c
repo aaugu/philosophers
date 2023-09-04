@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:08:44 by aaugu             #+#    #+#             */
-/*   Updated: 2023/08/31 13:18:35 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/04 14:48:19 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	is_input_valid(int ac, char **av)
 		nb = ft_atoui(av[i]);
 		if (i == 1 && (nb < 1 || nb > MAX_PHILOS))
 			return (msg("Wrong number of philosophers", NULL, false));
-		if (i != 1 && (nb <= 0))
+		if (i != 1 && nb <= 0)
 			return (msg("Invalid input of time.", av[i], false));
 		i++;
 	}

@@ -35,6 +35,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@($(CC) $(FLAGS) $(OBJS) -o $(NAME))
 			@echo "$(CYAN) [ OK ] | $(CYAN_B)philo$(END) $(CYAN)ready!$(END)"
+
 clean:
 			@($(RM) $(OBJ_P))
 			@echo "$(GREEN) [ OK ] | Objects removed!$(END)"
