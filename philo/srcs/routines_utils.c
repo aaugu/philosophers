@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:51:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/04 13:54:01 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/04 20:31:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,20 @@
 
 bool	dinner_finished(t_table *table)
 {
+	bool local_stop;
+
 	pthread_mutex_lock(&table->stop_lock);
-	if (table->stop == true)
-	{
-		pthread_mutex_unlock(&table->stop_lock);
-		return (true);
-	}
+	local_stop = table->stop;
 	pthread_mutex_unlock(&table->stop_lock);
-	return (false);
+	return (local_stop);
 }
 
 void	print_status(t_philo *philo, int status)
 {
 	unsigned int	now;
 
-	pthread_mutex_lock(&philo->table->stop_lock);
-	if (philo->table->stop == true)
-	{
-		pthread_mutex_unlock(&philo->table->stop_lock);
+	if (dinner_finished(philo->table) == true)
 		return ;
-	}
-	pthread_mutex_unlock(&philo->table->stop_lock);
 	now = get_time_in_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->print_lock);
 	if (status == FORK)

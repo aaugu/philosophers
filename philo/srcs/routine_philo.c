@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:53:41 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/04 15:22:13 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/04 20:02:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*routine(void *data)
 	sync_start_time(philo);
 	if (philo->table->nb_philos == 1)
 		return (alone_routine(philo));
-	if ((philo->id + 1) % 2 == 0)
+	if (philo->id % 2)
 		philo_waiting(philo, philo->table->time_to_eat);
 	while (dinner_finished(philo->table) == false)
 	{
@@ -69,9 +69,9 @@ void	eat_sleep_think(t_philo *philo)
 	pthread_mutex_unlock(&philo->meal_lock);
 	print_status(philo, EATING);
 	philo_waiting(philo, philo->table->time_to_eat);
-	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork_left]);
 	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork_right]);
-	if (dinner_finished(philo->table))
+	pthread_mutex_unlock(&philo->table->fork_locks[philo->fork_left]);
+	if (dinner_finished(philo->table) == false)
 	{
 		pthread_mutex_lock(&philo->meal_lock);
 		philo->nb_meals++;
