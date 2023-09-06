@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:51:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/06 14:02:26 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/06 19:30:10 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,22 @@ bool	dinner_finished(t_table *table)
 	return (stop);
 }
 
-void	print_status(t_philo *philo, int status)
+bool	am_i_dead(t_philo *philo)
 {
-	unsigned int	now;
+	bool dead;
 
-	if (dinner_finished(philo->table) == true)
-		return ;
-	now = get_time_in_ms() - philo->table->start_time;
+	pthread_mutex_lock(&philo->meal_lock);
+	dead = philo->dead;
+	pthread_mutex_unlock(&philo->meal_lock);
+	return (dead);
+}
+
+void	print_status(t_philo *philo, int status, unsigned int now)
+{
 	pthread_mutex_lock(&philo->table->print_lock);
+	if (dinner_finished(philo->table) || am_i_dead(philo))
+		return ;
+	now -= philo->table->start_time;
 	if (status == FORK)
 		printf("\e[1;36m%u %d has taken a fork\n\e[0m", now, philo->id + 1);
 	else if (status == EATING)

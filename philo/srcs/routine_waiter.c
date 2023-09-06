@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 19:26:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/06 14:26:21 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/06 19:37:14 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include "utils.h"
 #include "philosophers_dining.h"
 
-void	check_on_dinner(t_table *table);
-bool	philo_died(t_philo *philo, unsigned int now, unsigned int last_meal);
-bool	philo_ate_enough(int must_eat, unsigned int nb_meals);
+bool	end_of_dinner_condition(t_table *table);
+bool	philo_died(t_philo *philo);
+bool	philo_ate_enough(t_philo *philo);
 void	stop_dinner(t_table *table);
 
 void	*checking(void *data)
@@ -28,60 +28,73 @@ void	*checking(void *data)
 
 	table = (t_table *)data;
 	while (get_time_in_ms() < table->start_time)
-		continue ;
+		usleep(10);
+	if (table->must_eat == 0)
+		return (NULL);
 	while (true)
 	{
-		check_on_dinner(table);
-		if (table->philo_dead || table->philos_full == table->nb_philos)
-		{
-			stop_dinner(table);
+		if (end_of_dinner_condition(table) == true)
 			return (NULL);
-		}
+		usleep(10);
 	}
 	return (NULL);
 }
 
-void	check_on_dinner(t_table *table)
+bool	end_of_dinner_condition(t_table *table)
 {
 	unsigned int	i;
-	unsigned int	nb_meals;
-	unsigned int	last_meal;
-	unsigned int	now;
+	bool			philos_full;
 
 	i = 0;
-	table->philos_full = 0;
+	philos_full = true;
 	while (i < table->nb_philos)
 	{
-		pthread_mutex_lock(&table->philos[i].meal_lock);
-		nb_meals = table->philos[i].nb_meals;
-		last_meal = table->philos[i].last_meal;
-		pthread_mutex_unlock(&table->philos[i].meal_lock);
-		now = get_time_in_ms();
-		if (philo_died(&table->philos[i], now, last_meal))
-			return ;
-		if (table->must_eat > 0)
+		if (philo_died(&table->philos[i]))
+			return (true);
+		if (table->must_eat > 0 && philos_full == true)
 		{
-			if (nb_meals >= (unsigned int)table->must_eat)
-				table->philos_full++;
+			if (philo_ate_enough(&table->philos[i]) == false)
+				philos_full = false;
 		}
 		i++;
 	}
-}
-
-bool	philo_died(t_philo *philo, unsigned int now, unsigned int last_meal)
-{
-	if (now - last_meal >= philo->table->time_to_die)
+	if (philos_full)
 	{
-		philo->table->philo_dead = true;
-		print_status(philo, DIED);
+		stop_dinner(table);
 		return (true);
 	}
 	return (false);
 }
 
-bool	philo_ate_enough(int must_eat, unsigned int nb_meals)
+bool	philo_died(t_philo *philo)
 {
-	if ((int)nb_meals < must_eat)
+	unsigned int	now;
+	unsigned int	last_meal;
+
+	now = get_time_in_ms();
+	pthread_mutex_lock(&philo->meal_lock);
+	last_meal = philo->last_meal;
+	pthread_mutex_unlock(&philo->meal_lock);
+	if (now - last_meal >= philo->table->time_to_die)
+	{
+		pthread_mutex_lock(&philo->meal_lock);
+		philo->dead = true;
+		pthread_mutex_unlock(&philo->meal_lock);
+		print_status(philo, DIED, get_time_in_ms());
+		stop_dinner(philo->table);
+		return (true);
+	}
+	return (false);
+}
+
+bool	philo_ate_enough(t_philo *philo)
+{
+	unsigned int	nb_meals;
+
+	pthread_mutex_lock(&philo->meal_lock);
+	nb_meals = philo->nb_meals;
+	pthread_mutex_unlock(&philo->meal_lock);
+	if (nb_meals < (unsigned int)philo->table->must_eat)
 		return (false);
 	return (true);
 }

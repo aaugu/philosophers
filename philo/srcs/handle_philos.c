@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 14:33:00 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/01 11:46:57 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/06 17:58:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	init_philos(t_philo *philos, int nb_philos, t_table *table)
 		philos[i].id = i;
 		philos[i].nb_meals = 0;
 		philos[i].table = table;
+		philos[i].dead = false;
 		init_philo_forks(&philos[i], nb_philos);
 		i++;
 	}

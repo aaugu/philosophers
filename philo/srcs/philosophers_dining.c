@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/04 19:26:13 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/06 19:09:10 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	philosophers_having_dinner(t_table *table)
 {
 	unsigned int	i;
 
-	table->start_time = get_time_in_ms() + (table->nb_philos * 20);
+	table->start_time = get_time_in_ms() + (table->nb_philos * 50);
 	i = 0;
 	while (i < table->nb_philos)
 	{
@@ -75,6 +75,7 @@ int	philosophers_having_dinner(t_table *table)
 	}
 	if (table->nb_philos == 1)
 		return (EXIT_SUCCESS);
+	// checking(table);
 	if (pthread_create(&table->waiter, NULL, &checking, (void *)table) != 0)
 		return (msg(STR_ERR_THREAD, "Waiter", ERROR));
 	return (EXIT_SUCCESS);
