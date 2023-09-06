@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:51:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/04 20:31:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/06 14:02:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 bool	dinner_finished(t_table *table)
 {
-	bool local_stop;
+	bool stop;
 
 	pthread_mutex_lock(&table->stop_lock);
-	local_stop = table->stop;
+	stop = table->stop;
 	pthread_mutex_unlock(&table->stop_lock);
-	return (local_stop);
+	return (stop);
 }
 
 void	print_status(t_philo *philo, int status)

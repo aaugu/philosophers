@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 19:26:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/04 20:31:38 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/06 14:26:21 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	check_on_dinner(t_table *table)
 			return ;
 		if (table->must_eat > 0)
 		{
-			if (philo_ate_enough(table->must_eat, nb_meals))
+			if (nb_meals >= (unsigned int)table->must_eat)
 				table->philos_full++;
 		}
 		i++;
