@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 19:26:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/06 19:37:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/07 19:49:21 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@ bool	philo_died(t_philo *philo)
 	pthread_mutex_unlock(&philo->meal_lock);
 	if (now - last_meal >= philo->table->time_to_die)
 	{
-		pthread_mutex_lock(&philo->meal_lock);
-		philo->dead = true;
-		pthread_mutex_unlock(&philo->meal_lock);
 		print_status(philo, DIED, get_time_in_ms());
 		stop_dinner(philo->table);
 		return (true);

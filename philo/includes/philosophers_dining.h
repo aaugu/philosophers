@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 13:54:23 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/06 17:58:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/07 19:49:06 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ typedef struct s_table	t_table;
 typedef struct s_philo
 {
 	unsigned int	id;
-	bool			dead;
-	unsigned int	fork_left;
-	unsigned int	fork_right;
+	unsigned int	fork_1;
+	unsigned int	fork_2;
 	unsigned int	nb_meals;
 	unsigned int	last_meal;
 	pthread_mutex_t	meal_lock;
