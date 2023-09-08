@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/07 19:12:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/08 11:06:28 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	philosophers_having_dinner(t_table *table)
 	}
 	if (table->nb_philos == 1)
 		return (EXIT_SUCCESS);
-	// checking(table);
 	if (pthread_create(&table->waiter, NULL, &checking, (void *)table) != 0)
 		return (msg(STR_ERR_THREAD, "Waiter", ERROR));
 	return (EXIT_SUCCESS);

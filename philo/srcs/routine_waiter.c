@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 19:26:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/09/07 19:49:21 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/09/08 10:56:36 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	*checking(void *data)
 
 	table = (t_table *)data;
 	while (get_time_in_ms() < table->start_time)
-		usleep(10);
+		usleep(100);
 	if (table->must_eat == 0)
 		return (NULL);
 	while (true)
 	{
 		if (end_of_dinner_condition(table) == true)
 			return (NULL);
-		usleep(10);
+		usleep(100);
 	}
 	return (NULL);
 }
